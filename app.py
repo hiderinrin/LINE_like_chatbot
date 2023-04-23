@@ -1,6 +1,6 @@
-
 import streamlit as st
 import openai
+import base64
 
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
@@ -9,7 +9,7 @@ openai.api_key = st.secrets.OpenAIAPI.openai_api_key
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
         {"role": "system", "content": st.secrets.AppSettings.chatbot_setting}
-        ]
+    ]
 
 # チャットボットとやりとりする関数
 def communicate():
@@ -19,10 +19,9 @@ def communicate():
     messages.append(user_message)
 
     response = openai.ChatCompletion.create(
-        # model="gpt-4",
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=messages
-    )  
+    )
 
     bot_message = response["choices"][0]["message"]
     messages.append(bot_message)
@@ -38,44 +37,36 @@ user_input = st.text_input("メッセージを入力してください。", key=
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
-    # LINE風表示のためのカスタムスタイル
-    st.markdown("""
+    # LINE風デザインを適用するためのカスタムCSS
+    custom_css = """
     <style>
-        .bubble {
-            display: inline-block;
+        .container {
+            background-color: #1a1a1a;
+            border-radius: 10px;
             padding: 10px;
-            border-radius: 20px;
-            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
         }
-        .user {
-            background-color: #E6E6FA;
-            float: left;
-            clear: both;
+        .message {
+            color: white;
+            background-color: #4caf50;
+            border-radius: 15px;
+            padding: 5px 10px;
+            white-space: nowrap;
         }
         .assistant {
-            background-color: #00BFFF;
-            float: right;
-            clear: both;
-        }
-        .speaker {
-            font-weight: bold;
-            margin-bottom: 2px;
+            text-align: right;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """
+
+    st.markdown(custom_css, unsafe_allow_html=True)
 
     for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        if message["role"] == "user":
-            speaker = "おやじ💪"
-            bubble_class = "user"
+        if message["role"] == "assistant":
+            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
         else:
-            speaker = "ChatGPT🤖"
-            bubble_class = "assistant"
-
-        # カスタムスタイルを適用したメッセージ表示
-        st.markdown(f"""
-        <div class="bubble {bubble_class}">
-            <p class="speaker">{speaker}</p>
-            <p>{message["content"]}</p>
-        </div>
-        """, unsafe_allow_html=True)
+            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+        st.markdown(content, unsafe_allow_html=True)
