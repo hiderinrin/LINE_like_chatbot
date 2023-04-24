@@ -81,8 +81,9 @@ custom_css = """
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# 固定高さのメッセージ表示枠を作成
+# ここから表示枠を作成
 with st.container():
+    # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
     for message in messages[1:]:
         if message["role"] == "user":
@@ -91,6 +92,7 @@ with st.container():
             content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
         st.markdown(content, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
+    # ここまで表示枠の作成
 
 message_input_container = st.empty()
 st.write(" ")  # スペースを挿入して、下部の余白を作成
