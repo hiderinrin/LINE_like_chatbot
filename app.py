@@ -32,10 +32,6 @@ def communicate():
 st.title("My AI Assistant")
 st.write("ChatGPT APIを使ったチャットボットです。")
 
-message_input_container = st.empty()
-
-user_input = message_input_container.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
-
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
@@ -76,3 +72,8 @@ if st.session_state["messages"]:
         else:
             content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
         st.markdown(content, unsafe_allow_html=True)
+
+# 下部にメッセージ入力欄を配置
+message_input_container = st.empty()
+st.write(" ")  # スペースを挿入して、下部の余白を作成
+user_input = message_input_container.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
