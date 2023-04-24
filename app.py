@@ -115,10 +115,10 @@ with st.container():
         bot_message = reversed_messages[i + 1] if i + 1 < len(reversed_messages) else None
         
         if bot_message:
-            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {bot_message["content"]}</div></div>'
+            content = f'<div class="container"><div class="message">おやじ💪: {bot_message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)
 
-        content = f'<div class="container"><div class="message">おやじ💪: {user_message["content"]}</div></div>'
+        content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {user_message["content"]}</div></div>'
         st.markdown(content, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
