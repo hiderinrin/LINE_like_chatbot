@@ -32,7 +32,9 @@ def communicate():
 st.title("My AI Assistant")
 st.write("ChatGPT APIを使ったチャットボットです。")
 
-user_input = st.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
+message_input_container = st.empty()
+
+user_input = message_input_container.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
@@ -50,14 +52,18 @@ if st.session_state["messages"]:
             align-items: center;
         }
         .message {
-            color: white;
             background-color: #4caf50;
+            color: black;
             border-radius: 15px;
             padding: 5px 10px;
             white-space: nowrap;
         }
         .assistant {
             text-align: right;
+        }
+        .assistant .message {
+            background-color: #1a1a1a;
+            color: white;
         }
     </style>
     """
