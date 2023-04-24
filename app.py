@@ -37,6 +37,7 @@ if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
     # LINE風デザインを適用するためのカスタムCSS
+    # 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
     custom_css = """
     <style>
         .container {
@@ -53,7 +54,7 @@ if st.session_state["messages"]:
             color: black;
             border-radius: 15px;
             padding: 5px 10px;
-            white-space: pre-line;
+            white-space: pre-wrap;
         }
         .assistant {
             text-align: right;
@@ -67,7 +68,7 @@ if st.session_state["messages"]:
             overflow-y: scroll;
             width: 100%;
         }
-        .stTextInput input {
+        .stTextInput textarea {
             width: 100% !important;
             white-space: pre-wrap !important;
             word-wrap: break-word !important;
@@ -87,6 +88,7 @@ if st.session_state["messages"]:
                 content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
+
 
 # 下部にメッセージ入力欄を配置
 message_input_container = st.empty()
