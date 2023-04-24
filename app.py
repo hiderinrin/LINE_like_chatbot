@@ -67,7 +67,8 @@ custom_css = '''
         text-align: left;
     }
     .fixed-height {
-        height: 50vh;
+        # height: 50vh;
+        height: auto;
         overflow-y: auto;
         # overflow-y: scroll;
         width: 100%;
