@@ -91,8 +91,7 @@ custom_css = '''
         overflow-y: scroll;
         width: 100%;
         display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        flex-direction: column-reverse;
     }
     .stTextInput textarea {
         width: 100% !important;
@@ -110,14 +109,14 @@ with st.container():
     # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
 
-    # for message in messages[1:]:
-    for message in reversed(messages[1:]):
-        if message["role"] == "user":
-            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
-            st.markdown(content, unsafe_allow_html=True)  # ユーザーのメッセージを先に表示
-        else:
+    for message in messages[1:]:
+    # for message in reversed(messages[1:]):
+        if message["role"] == "assistant":
             content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)  # アシスタントのメッセージを後に表示
+        else:
+            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+            st.markdown(content, unsafe_allow_html=True)  # ユーザーのメッセージを先に表示
 
     st.markdown('</div>', unsafe_allow_html=True)
     # ここまで表示枠の作成
