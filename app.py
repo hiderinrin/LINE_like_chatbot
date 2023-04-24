@@ -67,6 +67,8 @@ if st.session_state["messages"]:
         }
         .stTextInput input {
             width: 100% !important;
+            white-space: pre-wrap !important;
+            word-wrap: break-word !important;
         }
     </style>
     """
@@ -87,11 +89,12 @@ if st.session_state["messages"]:
 
 # 下部にメッセージ入力欄を配置
 message_input_container = st.empty()
-st.write(" ")  # スペースを挿入して
+st.write(" ")  # スペースを挿入して、下部の余白を作成
 
 # 入力欄を中央に配置するために3つの列を作成
 cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
-user_input = cols[1].text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
+user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
 
+           
