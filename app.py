@@ -61,19 +61,33 @@ if st.session_state["messages"]:
             background-color: #1a1a1a;
             color: white;
         }
+        .fixed-height {
+            height: 300px;
+            overflow-y: auto;
+        }
     </style>
     """
 
     st.markdown(custom_css, unsafe_allow_html=True)
 
-    for message in reversed(messages[1:]):  # 直近のメッセージを上に
-        if message["role"] == "assistant":
-            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
-        else:
-            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
-        st.markdown(content, unsafe_allow_html=True)
+    # 固定高さのメッセージ表示枠を作成
+    with st.container():
+        st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
+        for message in reversed(messages[1:]):  # 直近のメッセージを上に
+            if message["role"] == "assistant":
+                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
+            else:
+                content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+            st.markdown(content, unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # 下部にメッセージ入力欄を配置
 message_input_container = st.empty()
 st.write(" ")  # スペースを挿入して、下部の余白を作成
-user_input = message_input_container.text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
+
+# 入力欄を中央に配置するために3つの列を作成
+cols = st.columns(3)
+
+# 中央の列にメッセージ入力欄を配置
+user_input = cols[1].text_input("メッセージを入力してください。", key="user_input", on_change=communicate)
+
