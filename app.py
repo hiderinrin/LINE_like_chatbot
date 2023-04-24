@@ -69,6 +69,7 @@ custom_css = '''
     .fixed-height {
         height: 80vh;
         overflow-y: auto;
+        overflow-y: scroll;
         width: 100%;
     }
     .stTextInput textarea {
@@ -78,6 +79,7 @@ custom_css = '''
     }
 </style>
 '''
+
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
