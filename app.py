@@ -91,7 +91,7 @@ custom_css = '''
         overflow-y: scroll;
         width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
     .stTextInput textarea {
         width: 100% !important;
