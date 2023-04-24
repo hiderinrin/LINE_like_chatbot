@@ -38,6 +38,7 @@ if st.session_state["messages"]:
 
     # LINE風デザインを適用するためのカスタムCSS
 # 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
+# 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
 custom_css = """
 <style>
     .container {
@@ -54,7 +55,7 @@ custom_css = """
         color: black;
         border-radius: 15px;
         padding: 5px 10px;
-        white-space: pre-line;
+        white-space: pre-wrap;
     }
     .assistant {
         text-align: right;
@@ -70,7 +71,7 @@ custom_css = """
     }
     .stTextInput textarea {
         width: 100% !important;
-        white-space: pre-line !important;
+        white-space: pre-wrap !important;
         word-wrap: break-word !important;
     }
 </style>
@@ -83,9 +84,9 @@ with st.container():
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
     for message in messages[1:]:
         if message["role"] == "user":
-            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+            content = f'<div class="container"><div class="message">おやじ💪: <pre>{message["content"]}</pre></div></div>'
         else:
-            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
+            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: <pre>{message["content"]}</pre></div></div>'
         st.markdown(content, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -97,3 +98,4 @@ cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
+
