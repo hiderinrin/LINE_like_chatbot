@@ -34,7 +34,7 @@ st.title("My AI Assistant")
 st.write("ChatGPT APIを使ったチャットボットです。")
 
 # 入力欄を中央に配置するために3つの列を作成
-cols = st.columns(3)
+# cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
@@ -98,9 +98,11 @@ with st.container():
     for message in reversed(messages[1:]):
         if message["role"] == "user":
             content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+            st.markdown(content, unsafe_allow_html=True)  # ユーザーのメッセージを先に表示
         else:
             content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
-        st.markdown(content, unsafe_allow_html=True)
+            st.markdown(content, unsafe_allow_html=True)  # アシスタントのメッセージを後に表示
+            
     st.markdown('</div>', unsafe_allow_html=True)
     # ここまで表示枠の作成
 
