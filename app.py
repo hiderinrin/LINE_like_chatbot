@@ -69,8 +69,8 @@ custom_css = '''
     .fixed-height {
         # height: 50vh;
         height: auto;
-        overflow-y: auto;
-        # overflow-y: scroll;
+        # overflow-y: auto;
+        overflow-y: scroll;
         width: 100%;
     }
     .stTextInput textarea {
