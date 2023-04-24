@@ -1,6 +1,7 @@
 import streamlit as st
 import openai
 import base64
+import textwrap
 
 # Streamlit Community Cloudの「Secrets」からOpenAI API keyを取得
 openai.api_key = st.secrets.OpenAIAPI.openai_api_key
@@ -52,7 +53,6 @@ if st.session_state["messages"]:
             color: black;
             border-radius: 15px;
             padding: 5px 10px;
-            white-space: nowrap;
         }
         .assistant {
             text-align: right;
@@ -73,11 +73,12 @@ if st.session_state["messages"]:
     # 固定高さのメッセージ表示枠を作成
     with st.container():
         st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
-        for message in reversed(messages[1:]):  # 直近のメッセージを上に
-            if message["role"] == "assistant":
-                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
+        for message in messages[1:]:
+            wrapped_content = textwrap.fill(message["content"], width=20)
+            if message["role"] == "user":
+                content = f'<div class="container"><div class="message">おやじ💪: {wrapped_content}</div></div>'
             else:
-                content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {wrapped_content}</div></div>'
             st.markdown(content, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
