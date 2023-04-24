@@ -108,8 +108,7 @@ st.markdown(custom_css, unsafe_allow_html=True)
 with st.container():
     # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
-    # for message in messages[1:]:
-    # メッセージのループ部分を逆順にする
+
     for message in reversed(messages[1:]):
         if message["role"] == "user":
             content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
@@ -117,9 +116,10 @@ with st.container():
         else:
             content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)  # アシスタントのメッセージを後に表示
-            
+
     st.markdown('</div>', unsafe_allow_html=True)
     # ここまで表示枠の作成
+
 
 # message_input_container = st.empty()
 # st.write(" ")  # スペースを挿入して、下部の余白を作成
