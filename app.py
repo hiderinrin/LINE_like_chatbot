@@ -65,6 +65,9 @@ if st.session_state["messages"]:
             height: 300px;
             overflow-y: auto;
         }
+        .stTextInput input {
+            width: 100% !important;
+        }
     </style>
     """
 
@@ -84,7 +87,7 @@ if st.session_state["messages"]:
 
 # 下部にメッセージ入力欄を配置
 message_input_container = st.empty()
-st.write(" ")  # スペースを挿入して、下部の余白を作成
+st.write(" ")  # スペースを挿入して
 
 # 入力欄を中央に配置するために3つの列を作成
 cols = st.columns(3)
