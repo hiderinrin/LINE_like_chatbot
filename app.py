@@ -81,15 +81,14 @@ if st.session_state["messages"]:
     with st.container():
         st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
         for message in messages[1:]:
-            wrapped_content = textwrap.fill(message["content"], width=20)
             if message["role"] == "user":
-                content = f'<div class="container"><div class="message">おやじ💪: {wrapped_content}</div></div>'
+                content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
             else:
-                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {wrapped_content}</div></div>'
+                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# 下部にメッセージ入力
+# 下部にメッセージ入力欄を配置
 message_input_container = st.empty()
 st.write(" ")  # スペースを挿入して、下部の余白を作成
 
@@ -98,3 +97,4 @@ cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
+
