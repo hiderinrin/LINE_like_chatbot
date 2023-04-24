@@ -62,7 +62,7 @@ if st.session_state["messages"]:
 custom_css = '''
 <style>
     .container {
-        background-color: #7a7a7a;
+        background-color: #4a4a4a;
         border-radius: 10px;
         padding: 10px;
         display: flex;
