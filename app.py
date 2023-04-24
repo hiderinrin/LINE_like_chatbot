@@ -39,7 +39,7 @@ if st.session_state["messages"]:
     # LINE風デザインを適用するためのカスタムCSS
 # 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
 # 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
-custom_css = 
+custom_css = '''
 <style>
     .container {
         background-color: #1a1a1a;
@@ -77,7 +77,7 @@ custom_css =
         word-wrap: break-word !important;
     }
 </style>
-
+'''
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
