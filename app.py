@@ -48,6 +48,9 @@ user_input = st.text_input("メッセージを入力してください。", key=
 if st.button("送信"):
     if user_input:  # 入力が空でないことを確認
         communicate()
+        st.session_state["user_input"] = ""  # 入力欄を消去
+        user_input = ""  # これも追加してみてください
+
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
