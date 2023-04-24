@@ -87,13 +87,11 @@ custom_css = '''
         text-align: left;
     }
     .fixed-height {
-        # height: 50vh;
         height: auto;
-        # overflow-y: auto;
         overflow-y: scroll;
         width: 100%;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     .stTextInput textarea {
         width: 100% !important;
@@ -111,8 +109,8 @@ with st.container():
     # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
 
-    # for message in messages[1:]:
-    for message in reversed(messages[1:]):
+    for message in messages[1:]:
+    # for message in reversed(messages[1:]):
         if message["role"] == "user":
             content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)  # ユーザーのメッセージを先に表示
