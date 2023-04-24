@@ -64,6 +64,7 @@ if st.session_state["messages"]:
         .fixed-height {
             height: 300px;
             overflow-y: auto;
+            width: 100%;
         }
         .stTextInput input {
             width: 100% !important;
@@ -97,4 +98,3 @@ cols = st.columns(3)
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
 
-           
