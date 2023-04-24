@@ -53,6 +53,7 @@ if st.session_state["messages"]:
             color: black;
             border-radius: 15px;
             padding: 5px 10px;
+            white-space: pre-line;
         }
         .assistant {
             text-align: right;
@@ -63,7 +64,7 @@ if st.session_state["messages"]:
         }
         .fixed-height {
             height: 300px;
-            overflow-y: auto;
+            overflow-y: scroll;
             width: 100%;
         }
         .stTextInput input {
@@ -88,7 +89,7 @@ if st.session_state["messages"]:
             st.markdown(content, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# 下部にメッセージ入力欄を配置
+# 下部にメッセージ入力
 message_input_container = st.empty()
 st.write(" ")  # スペースを挿入して、下部の余白を作成
 
@@ -97,4 +98,3 @@ cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
-
