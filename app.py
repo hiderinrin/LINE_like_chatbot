@@ -33,6 +33,9 @@ def communicate():
 st.title("My AI Assistant")
 st.write("ChatGPT APIを使ったチャットボットです。")
 
+# 中央の列にメッセージ入力欄を配置
+user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
+
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
@@ -67,8 +70,8 @@ custom_css = '''
         text-align: left;
     }
     .fixed-height {
-        height: 50vh;
-        # height: auto;
+        # height: 50vh;
+        height: auto;
         # overflow-y: auto;
         overflow-y: scroll;
         width: 100%;
@@ -97,13 +100,13 @@ with st.container():
     st.markdown('</div>', unsafe_allow_html=True)
     # ここまで表示枠の作成
 
-message_input_container = st.empty()
-st.write(" ")  # スペースを挿入して、下部の余白を作成
+# message_input_container = st.empty()
+# st.write(" ")  # スペースを挿入して、下部の余白を作成
 
-# 入力欄を中央に配置するために3つの列を作成
-cols = st.columns(3)
+# # 入力欄を中央に配置するために3つの列を作成
+# cols = st.columns(3)
 
-# 中央の列にメッセージ入力欄を配置
-user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
+# # 中央の列にメッセージ入力欄を配置
+# user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
 
 
