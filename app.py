@@ -56,6 +56,7 @@ custom_css = """
         border-radius: 15px;
         padding: 5px 10px;
         white-space: pre-wrap;
+        text-align: left;
     }
     .assistant {
         text-align: right;
@@ -63,10 +64,11 @@ custom_css = """
     .assistant .message {
         background-color: #1a1a1a;
         color: white;
+        text-align: left;
     }
     .fixed-height {
-        height: 300px;
-        overflow-y: scroll;
+        height: 80vh;
+        overflow-y: auto;
         width: 100%;
     }
     .stTextInput textarea {
@@ -84,9 +86,9 @@ with st.container():
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
     for message in messages[1:]:
         if message["role"] == "user":
-            content = f'<div class="container"><div class="message">おやじ💪: <pre>{message["content"]}</pre></div></div>'
+            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
         else:
-            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: <pre>{message["content"]}</pre></div></div>'
+            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
         st.markdown(content, unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -98,4 +100,5 @@ cols = st.columns(3)
 
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
+
 
