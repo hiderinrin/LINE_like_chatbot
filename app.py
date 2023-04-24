@@ -40,11 +40,14 @@ st.write("ChatGPT APIを使ったチャットボットです。")
 # user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
 
 # メッセージ入力欄をページ全体の幅に広げる
-user_input = st.text_area("メッセージを入力してください。", key="user_input")
+# user_input = st.text_area("メッセージを入力してください。", key="user_input")
+# メッセージ入力欄をページ全体の幅に広げる（1行の入力欄に変更）
+user_input = st.text_input("メッセージを入力してください。", key="user_input")
 
 # 送信ボタンを追加
 if st.button("送信"):
-    communicate()
+    if user_input:  # 入力が空でないことを確認
+        communicate()
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
