@@ -106,19 +106,22 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 with st.container():
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
-    
-    # 空のスペースを作成するための st.empty() オブジェクトのリスト
-    message_spaces = [st.empty() for _ in range(len(messages[1:]))]
-    
-    st.markdown('</div>', unsafe_allow_html=True)
 
-    for i, message in enumerate(reversed(messages[1:])):
-        if message["role"] == "user":
-            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
-            message_spaces[-(i+1)].markdown(content, unsafe_allow_html=True)
-        else:
-            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
-            message_spaces[-(i+1)].markdown(content, unsafe_allow_html=True)
+    reversed_messages = list(reversed(messages[1:]))
+    
+    # reversed_messagesをイテレーション
+    for i in range(0, len(reversed_messages), 2):
+        user_message = reversed_messages[i]
+        bot_message = reversed_messages[i + 1] if i + 1 < len(reversed_messages) else None
+        
+        if bot_message:
+            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {bot_message["content"]}</div></div>'
+            st.markdown(content, unsafe_allow_html=True)
+
+        content = f'<div class="container"><div class="message">おやじ💪: {user_message["content"]}</div></div>'
+        st.markdown(content, unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # message_input_container = st.empty()
 # st.write(" ")  # スペースを挿入して、下部の余白を作成
