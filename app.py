@@ -109,8 +109,8 @@ with st.container():
     # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
 
-    for message in messages[1:]:
-    # for message in reversed(messages[1:]):
+    # for message in messages[1:]:
+    for message in reversed(messages[1:]):
         if message["role"] == "assistant":
             content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
             st.markdown(content, unsafe_allow_html=True)  # アシスタントのメッセージを後に表示
