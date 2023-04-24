@@ -33,14 +33,16 @@ def communicate():
 st.title("My AI Assistant")
 st.write("ChatGPT APIを使ったチャットボットです。")
 
+# 入力欄を中央に配置するために3つの列を作成
+cols = st.columns(3)
+
 # 中央の列にメッセージ入力欄を配置
 user_input = cols[1].text_area("メッセージを入力してください。", key="user_input", on_change=communicate)
 
 if st.session_state["messages"]:
     messages = st.session_state["messages"]
 
-    # LINE風デザインを適用するためのカスタムCSS
-# 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
+# LINE風デザインを適用するためのカスタムCSS
 # 縦スクロールバーの追加と、文字の表示を左端から始めるようにする
 custom_css = '''
 <style>
@@ -91,7 +93,9 @@ st.markdown(custom_css, unsafe_allow_html=True)
 with st.container():
     # 固定高さのメッセージ表示枠を作成
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
-    for message in messages[1:]:
+    # for message in messages[1:]:
+    # メッセージのループ部分を逆順にする
+    for message in reversed(messages[1:]):
         if message["role"] == "user":
             content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
         else:
