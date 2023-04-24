@@ -91,7 +91,7 @@ custom_css = '''
         overflow-y: scroll;
         width: 100%;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     .stTextInput textarea {
         width: 100% !important;
@@ -107,23 +107,18 @@ st.markdown(custom_css, unsafe_allow_html=True)
 with st.container():
     st.markdown('<div class="fixed-height">', unsafe_allow_html=True)
     
-    # メッセージを表示するための空のコンテナリストを作成
-    message_containers = [st.empty() for _ in range(len(messages[1:]))]
+    # 空のスペースを作成するための st.empty() オブジェクトのリスト
+    message_spaces = [st.empty() for _ in range(len(messages[1:]))]
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # 順序を反転させたメッセージを作成
-    reversed_messages = list(reversed(messages[1:]))
-
-    # 反転させたメッセージを表示
-    for i, message in enumerate(reversed_messages):
-        with message_containers[i]:
-            if message["role"] == "user":
-                content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
-                st.markdown(content, unsafe_allow_html=True)
-            else:
-                content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
-                st.markdown(content, unsafe_allow_html=True)
+    for i, message in enumerate(reversed(messages[1:])):
+        if message["role"] == "user":
+            content = f'<div class="container"><div class="message">おやじ💪: {message["content"]}</div></div>'
+            message_spaces[-(i+1)].markdown(content, unsafe_allow_html=True)
+        else:
+            content = f'<div class="container assistant"><div class="message">ChatGPT🤖: {message["content"]}</div></div>'
+            message_spaces[-(i+1)].markdown(content, unsafe_allow_html=True)
 
 # message_input_container = st.empty()
 # st.write(" ")  # スペースを挿入して、下部の余白を作成
